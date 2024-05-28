@@ -9,7 +9,7 @@ import p8_img from "./Produtowomen_8.jpeg";
 
 let new_collection = [
   {
-    id: 12,
+    id: 34,
     name: "Embroidered One Piece T-shirt",
     image: p1_img,
     new_price: 15.0,
@@ -23,42 +23,42 @@ let new_collection = [
     old_price: 35.99,
   },
   {
-    id: 14,
+    id: 36,
     name: "One Piece sweatshirt in black",
     image: p3_img,
     new_price: 30.00,
     old_price: 35.99,
   },
   {
-    id: 8,
+    id: 37,
     name: "Straight striped pants",
     image: p4_img,
     new_price: 15.99,
     old_price: 25.99,
   },
   {
-    id: 15,
+    id: 38,
     name: "Basic cargo jogger pants",
     image: p5_img,
     new_price: 25.99,
     old_price: 30.00,
   },
   {
-    id: 2,
+    id: 39,
     name: "Short dress with ruffles",
     image: p6_img,
     new_price: 10.00,
     old_price: 25.00,
   },
   {
-    id: 17,
+    id: 40,
     name: "Jogger bermuda shorts",
     image: p7_img,
     new_price: 15.00,
     old_price: 20.00,
   },
   {
-    id: 28,
+    id: 41,
     name: "Short wrinkled dress",
     image: p8_img,
     new_price: 20.00,
