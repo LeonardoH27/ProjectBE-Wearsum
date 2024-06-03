@@ -3,6 +3,7 @@ import "./newcollection.css"
 import New_collections from '../Assets/new_collections'
 import Item from '../Items/item'
 
+
 const Newcollection = () => {
     return (
       <div className='new-collection'>
@@ -17,4 +18,4 @@ const Newcollection = () => {
     )
   }
 
-export default Newcollection
+export default Newcollection;
