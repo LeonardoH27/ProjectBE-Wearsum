@@ -1,20 +1,20 @@
-import React from 'react'
-import Hero from "../Components/Hero/hero"
-import Emphasis from '../Components/Emphasis/emphasis'
-import Promotions from '../Components/Promotions/promotions'
-import Newcollection from '../Components/Newcollection/newcollection'
-import Updatenews from '../Components/Updatenews/updatenews'
+import React from "react";
+import Hero from "../Components/hero/Hero";
+import Emphasis from "../Components/emphasis/Emphasis";
+import Promotions from "../Components/promotions/Promotions";
+import Newcollection from "../Components/newcollection/Newcollection";
+import Updatenews from "../Components/updatenews/Updatenews";
 
 const Shop = () => {
   return (
     <div>
-        <Hero/>
-        <Emphasis/>
-        <Promotions/>
-        <Newcollection/>
-        <Updatenews/>
+      <Hero />
+      <Emphasis />
+      <Promotions />
+      <Newcollection />
+      <Updatenews />
     </div>
-  )
-}
+  );
+};
 
-export default Shop
+export default Shop;

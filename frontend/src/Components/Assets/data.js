@@ -10,7 +10,6 @@ let data_product = [
     category: "women",
     image: p14_img,
     new_price: 35.0,
-    
   },
   {
     id: 15,
@@ -18,7 +17,6 @@ let data_product = [
     category: "women",
     image: p15_img,
     new_price: 25.0,
-    
   },
   {
     id: 16,
@@ -26,7 +24,6 @@ let data_product = [
     category: "women",
     image: p16_img,
     new_price: 9.99,
-    
   },
   {
     id: 17,
@@ -34,7 +31,6 @@ let data_product = [
     category: "women",
     image: p17_img,
     new_price: 12.99,
-    
   },
 ];
 

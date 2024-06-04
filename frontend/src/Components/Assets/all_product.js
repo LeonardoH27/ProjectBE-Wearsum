@@ -23,71 +23,62 @@ import p24_img from "./Produtomen__6.jpeg";
 import p25_img from "./Produtomen__7.jpeg";
 import p26_img from "./Produtomen__8.jpeg";
 
-
 let all_product = [
   {
     id: 1,
-    name: "SQUARE COTTON DRESS FOR GIRLS",
+    name: "Square cotton dress for girls",
     category: "kid",
     image: p1_img,
-    new_price: 25.00
-    
+    new_price: 25.0,
   },
   {
     id: 2,
-    name: "SQUARE COTTON SKIRT-SHORT FOR GIRLS",
+    name: "Square cotton skirt-short for girls",
     category: "kid",
     image: p2_img,
-    new_price: 30.00,
-  
+    new_price: 30.0,
   },
   {
     id: 3,
-    name: "CONJUNTO PARA MENINA E MENINO ",
+    name: "Set for girl and boy ",
     category: "kid",
     image: p3_img,
-    new_price: 20.00,
-    
+    new_price: 20.0,
   },
   {
     id: 4,
-    name: "COTTON DRESS WITH EMBROIDERY",
+    name: "Cotton dress with embroidery",
     category: "kid",
     image: p4_img,
-    new_price: 35.00,
-    
+    new_price: 35.0,
   },
   {
     id: 5,
-    name: "FLORAL CREPE DRESS FOR GIRLS",
+    name: "Floral crepe dress for girls",
     category: "kid",
     image: p5_img,
-    new_price: 20.00,
-  
+    new_price: 20.0,
   },
   {
     id: 6,
-    name: "COTTON AND LINEN DRESS FOR GIRL",
+    name: "Cotton and linen dress for girl",
     category: "kid",
     image: p6_img,
-    new_price: 35.00,
-    
+    new_price: 35.0,
   },
   {
     id: 7,
-    name: "SHORT SLEEVE T-SHIRT",
+    name: "Short sleeve t-shirt",
     category: "kid",
     image: p7_img,
     new_price: 15.0,
-    
   },
   {
     id: 8,
-    name: "SHORT SLEEVED SHIRT",
+    name: "Short sleeved shirt",
     category: "kid",
     image: p8_img,
     new_price: 25.0,
-    
   },
 
   {
@@ -96,7 +87,6 @@ let all_product = [
     category: "women",
     image: p10_img,
     new_price: 24.99,
-    
   },
   {
     id: 11,
@@ -104,7 +94,6 @@ let all_product = [
     category: "women",
     image: p11_img,
     new_price: 20.0,
-    
   },
   {
     id: 12,
@@ -112,7 +101,6 @@ let all_product = [
     category: "women",
     image: p12_img,
     new_price: 30.99,
-    
   },
   {
     id: 13,
@@ -120,7 +108,6 @@ let all_product = [
     category: "women",
     image: p13_img,
     new_price: 20.0,
-    
   },
   {
     id: 14,
@@ -128,15 +115,13 @@ let all_product = [
     category: "women",
     image: p14_img,
     new_price: 35.0,
-    
   },
   {
     id: 15,
-    name: "crochet pants",
+    name: "Crochet pants",
     category: "women",
     image: p15_img,
     new_price: 25.0,
-    
   },
   {
     id: 16,
@@ -144,15 +129,13 @@ let all_product = [
     category: "women",
     image: p16_img,
     new_price: 9.99,
-    
   },
   {
     id: 17,
-    name: "blackberry t-shirt",
+    name: "Blackberry t-shirt",
     category: "women",
     image: p17_img,
     new_price: 12.99,
-    
   },
 
   {
@@ -168,7 +151,6 @@ let all_product = [
     category: "men",
     image: p20_img,
     new_price: 25.0,
-    
   },
   {
     id: 21,
@@ -212,7 +194,6 @@ let all_product = [
     image: p26_img,
     new_price: 14.99,
   },
-  
 ];
 
 export default all_product;

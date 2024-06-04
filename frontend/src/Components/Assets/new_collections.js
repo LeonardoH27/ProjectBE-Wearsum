@@ -13,7 +13,6 @@ let new_collection = [
     category: "women",
     image: p10_img,
     new_price: 24.99,
-    
   },
   {
     id: 11,
@@ -21,7 +20,6 @@ let new_collection = [
     category: "women",
     image: p11_img,
     new_price: 20.0,
-    
   },
   {
     id: 12,
@@ -29,7 +27,6 @@ let new_collection = [
     category: "women",
     image: p12_img,
     new_price: 30.99,
-    
   },
   {
     id: 13,
@@ -37,7 +34,6 @@ let new_collection = [
     category: "women",
     image: p13_img,
     new_price: 20.0,
-    
   },
   {
     id: 23,
@@ -68,7 +64,5 @@ let new_collection = [
     new_price: 14.99,
   },
 ];
-    
-  
 
 export default new_collection;
