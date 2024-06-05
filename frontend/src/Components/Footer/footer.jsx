@@ -12,10 +12,10 @@ const Footer = () => {
         <img src={footer_logo} alt="" />
       </div>
       <ul className="footer-links">
-        <li>Company</li>
-        <li>Products</li>
-        <li>Offices</li>
         <li>About</li>
+        <li>Questions</li>
+        <li>Submissions</li>
+        <li>Help</li>
         <li>Contact</li>
       </ul>
       <div className="footer-social-icon">
@@ -30,7 +30,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer-copyright">
-        <p>Copyright @ 2024 - All Right Reserved.</p>
+        <p> © 2024 WEARSUM ALL RIGHTS RESERVED</p>
       </div>
     </div>
   );

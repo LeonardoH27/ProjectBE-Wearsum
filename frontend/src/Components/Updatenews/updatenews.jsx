@@ -4,10 +4,10 @@ import "./Updatenews.css";
 const Updatenews = () => {
   return (
     <div className="updatenews">
-      <h1>Receive Promotions In Your Email</h1>
-      <p>Subscribe to our update news </p>
+      <h1>Get ready to discover all the trends!</h1>
+      <p>Subscribe to our update news :D </p>
       <div>
-        <input type="email" placeholder="Your Email" />
+        <input type="email" placeholder="E-mail" />
         <button>Subscribe</button>
       </div>
     </div>

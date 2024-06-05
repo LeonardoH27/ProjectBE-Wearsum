@@ -21,6 +21,8 @@
   color: black;
   font-size: 45px;
   font-weight: 600;
+  
+  
 }
 
 .updatenews p {
@@ -34,9 +36,9 @@
   justify-content: space-between;
   background: white;
   width: 95%;
-  max-width: 650px;
+  max-width: 500px;
   height: 60px;
-  border-radius: 80px;
+  border-radius: 3px;
   border: 1px solid #e3e3e3;
 }
 
@@ -50,12 +52,12 @@
 }
 
 .updatenews div button {
-  width: 180px;
+  width: 150px;
   height: 60px;
-  border-radius: 80px;
   background: black;
   color: white;
   font-size: 16px;
+  border-radius: 3px;
   cursor: pointer;
   border: none;
 }

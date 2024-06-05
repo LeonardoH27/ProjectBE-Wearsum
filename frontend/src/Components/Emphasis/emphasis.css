@@ -12,7 +12,7 @@
   font-weight: 500;
 }
 .emphasis hr {
-  width: 80%;
+  width: 90%;
   border: none;
   border-radius: 10px;
   height: 2px;
@@ -25,14 +25,4 @@
   gap: 25px;
   justify-content: center;
 }
-/* ---------- media query------------ */
 
-@media (max-width: 800px) {
-  .emphasis h1 {
-    font-size: 30px;
-  }
-  .emphasis hr {
-    width: 80px;
-    height: 4px;
-  }
-}
