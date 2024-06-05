@@ -28,6 +28,9 @@
   align-items: center;
   gap: 20px;
 }
+.hero-latest-btn img {
+  filter: invert();
+}
 .hero-hand-icon img {
   width: 70px;
 }

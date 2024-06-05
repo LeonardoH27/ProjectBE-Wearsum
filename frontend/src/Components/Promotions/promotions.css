@@ -34,18 +34,22 @@
   font-weight: 500;
 }
 
-.promotions-left button {
-  width: 284px;
-  height: 70px;
+.hero-latest-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  width: 250px;
+  height: 60px;
   border-radius: 10px;
-  background-color: black;
-  border: none;
+  margin-top: 20px;
+  background: black;
   color: white;
-  font-size: 23px;
+  font-size: 20px;
   font-weight: 500;
-  margin-top: 30px;
   cursor: pointer;
 }
+
 
 .promotions-right {
   flex: 2;

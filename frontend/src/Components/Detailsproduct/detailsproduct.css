@@ -8,3 +8,8 @@
   font-weight: 600;
   margin: 40px 10%;
 }
+
+.detailsproduct img {
+  height: auto;
+  width: 20px;
+}

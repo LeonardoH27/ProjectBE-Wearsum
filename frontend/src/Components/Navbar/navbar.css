@@ -16,13 +16,13 @@
 }
 
 .nav-menu {
-  display: flex;
-  align-items: center;
+  display:flex;
+  align-items:center;
   list-style: none;
-  gap: 100px;
+  gap: 75px;
   color: #515151;
   font-size: 16px;
-  font-weight: 500;
+  font-weight: 600;
 }
 
 .nav-menu li {
