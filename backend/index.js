@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-//Upload Images
+//UPLOAD IMAGE
 const storage = multer.diskStorage({
   destination: "./upload/images",
   filename: (req, file, cb) => {
