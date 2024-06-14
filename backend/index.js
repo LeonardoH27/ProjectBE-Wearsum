@@ -2,8 +2,8 @@ const port = 4000;
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
-const multer = require("multer");
+const jwt = require("jsonwebtoken"); // Tokens 
+const multer = require("multer"); // Framework nodeJS
 const app = express();
 const cors = require("cors");
 
@@ -40,6 +40,7 @@ app.post("/upload", upload.single("product"), (req, res) => {
   });
 });
 
+//DETAILS PRODUCT
 const Product = mongoose.model("Product", {
   id: {
     type: Number,
