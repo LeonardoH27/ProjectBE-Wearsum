@@ -16,6 +16,24 @@ const Allproducts = () => {
   useEffect(()=>{
    getallproducts();
   },[])
+
+  const removeproduct = async (id) => {
+    await fetch("http://localhost:4000/removeproduct", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: id}),
+    })
+
+      await getallproducts()
+      
+     .then((resp) => resp.json())
+     .then((data) => {
+        data.success? alert("Product removed successfully") : alert("Fail");
+      });
+  }
   return (
     <div className="allproducts">
       <h1>All Products</h1>
@@ -36,7 +54,7 @@ const Allproducts = () => {
             <p>${product.old_price}</p>
             <p>${product.new_price}</p>
             <p>{product.category}</p>
-            <img src={Remove} alt="" className="removeproduct" />
+            <img  onClick={()=>{removeproduct(product.id)}} src={Remove} alt="" className="removeproduct" />
           </div>
 
         }

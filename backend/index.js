@@ -71,6 +71,7 @@ const Product = mongoose.model("Product", {
     default: Date.now,
   },
 });
+
 // ADD PRODUCT
 app.post("/addproduct", async (req, res) => {
   let products = await Product.find({});
@@ -98,6 +99,61 @@ app.post("/addproduct", async (req, res) => {
     name: req.body.name,
   });
 });
+
+//USER 
+
+const Users = mongoose.model("Users", {
+  name: {
+    type: String,
+  },
+  email: {
+    type: String,
+    unique: true,
+  },
+  password: {
+    type: String,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  cartData: {
+    type:Object,
+  }
+});
+
+//REGISTER
+
+app.post("/signup", async(req, res)=>{
+
+  let check = await Users.findOne({email:req.body.email});
+  if(check){
+    return res.status(400).json({success: false, errors: "There is an existing user"})
+  }
+  let cart = {};
+  for (let i = 0; i < 300 ; i++) {
+    cart[i] = 0;
+  }
+  const user = new Users({
+    name: req.body.username,
+    email: req.body.email,
+    password:  req.body.password,
+    cartData: cart,
+  })
+
+  await user.save();
+
+  const data ={
+    user:{
+      id: user.id
+    }
+  }
+
+  const token = jwt.sign(data, "secret");
+  res.json({
+    success: true,token
+  });
+})
 
 //REMOVE PRODUCT
 app.post("/removeproduct", async (req, res) => {
