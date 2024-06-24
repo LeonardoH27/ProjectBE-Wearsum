@@ -2,7 +2,7 @@ const port = 4000;
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken"); // Tokens 
+const jwt = require("jsonwebtoken"); // Tokens
 const multer = require("multer"); // Framework nodeJS
 const app = express();
 const cors = require("cors");
@@ -100,7 +100,7 @@ app.post("/addproduct", async (req, res) => {
   });
 });
 
-//USER 
+//USER
 
 const Users = mongoose.model("Users", {
   name: {
@@ -118,42 +118,72 @@ const Users = mongoose.model("Users", {
     default: Date.now,
   },
   cartData: {
-    type:Object,
-  }
+    type: Object,
+  },
 });
 
 //REGISTER
 
-app.post("/signup", async(req, res)=>{
-
-  let check = await Users.findOne({email:req.body.email});
-  if(check){
-    return res.status(400).json({success: false, errors: "There is an existing user"})
+app.post("/signup", async (req, res) => {
+  let check = await Users.findOne({ email: req.body.email });
+  if (check) {
+    return res
+      .status(400)
+      .json({ success: false, errors: "There is an existing user" });
   }
   let cart = {};
-  for (let i = 0; i < 300 ; i++) {
+  for (let i = 0; i < 300; i++) {
     cart[i] = 0;
   }
   const user = new Users({
     name: req.body.username,
     email: req.body.email,
-    password:  req.body.password,
+    password: req.body.password,
     cartData: cart,
-  })
+  });
 
   await user.save();
 
-  const data ={
-    user:{
-      id: user.id
-    }
-  }
+  const data = {
+    user: {
+      id: user.id,
+    },
+  };
 
   const token = jwt.sign(data, "secret");
   res.json({
-    success: true,token
+    success: true,
+    token,
   });
-})
+});
+
+//LOGIN
+
+app.post("/login", async (req, res) => {
+  let user = await Users.findOne({ email: req.body.email });
+  if (user) {
+    const passCompare = req.body.password === user.password;
+    if (passCompare) {
+      const data = {
+        user: {
+          id: user.id,
+        },
+      };
+      const token = jwt.sign(data, "secret_ecom");
+      res.json({ success: true, token });
+    } else {
+      res.json({
+        success: false,
+        errors: "please try with correct email/password",
+      });
+    }
+  } else {
+    res.json({
+      success: false,
+      errors: "please try with correct email/password",
+    });
+  }
+});
 
 //REMOVE PRODUCT
 app.post("/removeproduct", async (req, res) => {
@@ -170,9 +200,7 @@ app.get("/allproducts", async (req, res) => {
   let products = await Product.find({});
   console.log("Search completed");
   res.send(products);
-
-  });
-
+});
 
 app.listen(port, (error) => {
   if (!error) {
