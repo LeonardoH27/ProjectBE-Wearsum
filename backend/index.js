@@ -58,17 +58,19 @@ const Product = mongoose.model("Product", {
     type: String,
     required: true,
   },
-  old_price: {
-    type: Number,
-    required: true,
-  },
   new_price: {
     type: Number,
-    required: true,
+  },
+  old_price: {
+    type: Number,
   },
   date: {
     type: Date,
     default: Date.now,
+  },
+  avilable: {
+    type: Boolean,
+    default: true,
   },
 });
 
@@ -88,16 +90,13 @@ app.post("/addproduct", async (req, res) => {
     name: req.body.name,
     image: req.body.image,
     category: req.body.category,
-    old_price: req.body.old_price,
     new_price: req.body.new_price,
+    old_price: req.body.old_price,
   });
   console.log(product);
   await product.save();
   console.log("Saved");
-  res.json({
-    success: true,
-    name: req.body.name,
-  });
+  res.json({ success: true, name: req.body.name });
 });
 
 //USER
@@ -198,7 +197,7 @@ app.post("/removeproduct", async (req, res) => {
 //ALL PRODUCT
 app.get("/allproducts", async (req, res) => {
   let products = await Product.find({});
-  console.log("Search completed");
+  console.log("All Products");
   res.send(products);
 });
 
@@ -209,3 +208,26 @@ app.listen(port, (error) => {
     console.log("Fatal erro:" + error);
   }
 });
+
+//ADDING PRODUCTS IN CARTDATA
+
+app.post("/addtocart",fetchUser, async (req, res) => {
+  console.log(req.body,req.user);
+});
+
+//MIDDELWARE TO FETCH USER
+
+const fetchUser = async (req, res) => {
+  const token = req.header("auth-token");
+  if (!token) {
+    res.status(401).send({ errors: "No token, authorization denied" });
+  }
+  else{try {
+    const data = jwt.verify(token, "secret_ecom");
+    req.user = data.user;
+    next();
+  } catch (error) {
+    res.status(401).send({errors: "Token is not valid" });
+  }}
+  
+}
