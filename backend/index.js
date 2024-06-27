@@ -2,26 +2,40 @@ const port = 4000;
 const express = require("express");
 const path = require("path");
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken"); // Tokens
-const multer = require("multer"); // Framework nodeJS
+const jwt = require("jsonwebtoken");
+const multer = require("multer");
 const app = express();
 const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
 
-//  MongoDB
+// MongoDB
 mongoose.connect(
   "mongodb+srv://leonardohorta2705:12345678910@cluster0.hhhqnbx.mongodb.net/wearsum"
 );
 
-//API
+// Middleware to fetch user
+const fetchUser = (req, res, next) => {
+  const token = req.header("auth-token");
+  if (!token) {
+    return res.status(401).send({ errors: "No token, authorization denied" });
+  }
+  try {
+    const data = jwt.verify(token, "secret_ecom");
+    req.user = data.user;
+    next();
+  } catch (error) {
+    return res.status(401).send({ errors: "Token is not valid" });
+  }
+};
 
+// API
 app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-//UPLOAD IMAGE
+// UPLOAD IMAGE
 const storage = multer.diskStorage({
   destination: "./upload/images",
   filename: (req, file, cb) => {
@@ -40,7 +54,7 @@ app.post("/upload", upload.single("product"), (req, res) => {
   });
 });
 
-//DETAILS PRODUCT
+// DETAILS PRODUCT
 const Product = mongoose.model("Product", {
   id: {
     type: Number,
@@ -99,8 +113,7 @@ app.post("/addproduct", async (req, res) => {
   res.json({ success: true, name: req.body.name });
 });
 
-//USER
-
+// USER
 const Users = mongoose.model("Users", {
   name: {
     type: String,
@@ -121,8 +134,7 @@ const Users = mongoose.model("Users", {
   },
 });
 
-//REGISTER
-
+// REGISTER
 app.post("/signup", async (req, res) => {
   let check = await Users.findOne({ email: req.body.email });
   if (check) {
@@ -156,8 +168,7 @@ app.post("/signup", async (req, res) => {
   });
 });
 
-//LOGIN
-
+// LOGIN
 app.post("/login", async (req, res) => {
   let user = await Users.findOne({ email: req.body.email });
   if (user) {
@@ -184,7 +195,7 @@ app.post("/login", async (req, res) => {
   }
 });
 
-//REMOVE PRODUCT
+// REMOVE PRODUCT
 app.post("/removeproduct", async (req, res) => {
   await Product.findOneAndDelete({ id: req.body.id });
   console.log("Removed");
@@ -194,40 +205,64 @@ app.post("/removeproduct", async (req, res) => {
   });
 });
 
-//ALL PRODUCT
+// ALL PRODUCT
 app.get("/allproducts", async (req, res) => {
   let products = await Product.find({});
   console.log("All Products");
   res.send(products);
 });
 
+// ADDING PRODUCTS IN CARTDATA
+app.post("/addtocart", fetchUser, async (req, res) => {
+  console.log(req.body, req.user);
+  try {
+    let userData = await Users.findOne({ _id: req.user.id });
+    if (!userData) {
+      return res.status(404).send('Usuário não encontrado');
+    }
+
+    if (!userData.cartData.hasOwnProperty(req.body.itemId)) {
+      userData.cartData[req.body.itemId] = 1;
+    } else {
+      userData.cartData[req.body.itemId] += 1;
+    }
+
+    await Users.findOneAndUpdate(
+      { _id: req.user.id },
+      { cartData: userData.cartData }
+    );
+
+    res.send("Added");
+  } catch (error) {
+    res.status(500).send('Erro ao adicionar ao carrinho');
+  }
+});
+
+// REMOVE PRODUCT FROM CARTDATA
+app.post("/removefromcart", fetchUser, async (req, res) => {
+  console.log("Remove Cart");
+  let userData = await Users.findOne({ _id: req.user.id });
+  if (userData.cartData[req.body.itemId] != 0) {
+    userData.cartData[req.body.itemId] -= 1;
+  }
+  await Users.findOneAndUpdate(
+    { _id: req.user.id },
+    { cartData: userData.cartData }
+  );
+  res.send("Removed");
+});
+
+// ENDPOINT CARTDATA
+app.post("/getcart", fetchUser, async (req, res) => {
+  console.log("Get Cart");
+  let userData = await Users.findOne({ _id: req.user.id });
+  res.json(userData.cartData);
+});
+
 app.listen(port, (error) => {
   if (!error) {
-    console.log("Server is running on port" + port);
+    console.log("Server is running on port " + port);
   } else {
-    console.log("Fatal erro:" + error);
+    console.log("Fatal error: " + error);
   }
 });
-
-//ADDING PRODUCTS IN CARTDATA
-
-app.post("/addtocart",fetchUser, async (req, res) => {
-  console.log(req.body,req.user);
-});
-
-//MIDDELWARE TO FETCH USER
-
-const fetchUser = async (req, res) => {
-  const token = req.header("auth-token");
-  if (!token) {
-    res.status(401).send({ errors: "No token, authorization denied" });
-  }
-  else{try {
-    const data = jwt.verify(token, "secret_ecom");
-    req.user = data.user;
-    next();
-  } catch (error) {
-    res.status(401).send({errors: "Token is not valid" });
-  }}
-  
-}
