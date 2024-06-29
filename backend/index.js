@@ -4,6 +4,7 @@ const path = require("path");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
+const bcrypt = require("bcryptjs"); // Import bcryptjs
 const app = express();
 const cors = require("cors");
 
@@ -146,10 +147,15 @@ app.post("/signup", async (req, res) => {
   for (let i = 0; i < 300; i++) {
     cart[i] = 0;
   }
+
+  // Hash the password before saving it
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(req.body.password, salt);
+
   const user = new Users({
     name: req.body.username,
     email: req.body.email,
-    password: req.body.password,
+    password: hashedPassword,
     cartData: cart,
   });
 
@@ -172,7 +178,7 @@ app.post("/signup", async (req, res) => {
 app.post("/login", async (req, res) => {
   let user = await Users.findOne({ email: req.body.email });
   if (user) {
-    const passCompare = req.body.password === user.password;
+    const passCompare = await bcrypt.compare(req.body.password, user.password);
     if (passCompare) {
       const data = {
         user: {
@@ -218,7 +224,7 @@ app.post("/addtocart", fetchUser, async (req, res) => {
   try {
     let userData = await Users.findOne({ _id: req.user.id });
     if (!userData) {
-      return res.status(404).send('Usuário não encontrado');
+      return res.status(404).send("Usuário não encontrado");
     }
 
     if (!userData.cartData.hasOwnProperty(req.body.itemId)) {
@@ -234,7 +240,7 @@ app.post("/addtocart", fetchUser, async (req, res) => {
 
     res.send("Added");
   } catch (error) {
-    res.status(500).send('Erro ao adicionar ao carrinho');
+    res.status(500).send("Erro ao adicionar ao carrinho");
   }
 });
 

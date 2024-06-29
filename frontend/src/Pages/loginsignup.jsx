@@ -4,59 +4,59 @@ import "../Pages/CSS/loginsignup.css";
 
 const Loginsignup = () => {
   const [state, setState] = useState("Login");
-  const[formData, setFormData] = useState({
-    username:"",
-    password:"",
-    email:""
-  })
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    email: "",
+  });
 
-  const changeHandler =(e) => {
-    setFormData({...formData, [e.target.name]:e.target.value})
+  const changeHandler = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
-  }
-  
-  const login = async () =>{
+  const login = async () => {
     console.log("Login Executed", formData);
     let responseData;
-    await fetch ("http://localhost:4000/login",{
+    await fetch("http://localhost:4000/login", {
       method: "POST",
       headers: {
         Accept: "application/form-data",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    }).then((response) => response.json()).then((data)=> responseData=data)
+    })
+      .then((response) => response.json())
+      .then((data) => (responseData = data));
 
     if (responseData.success) {
       localStorage.setItem("auth-token", responseData.token);
       window.location.replace("/");
-    }else{
-      alert(responseData.errors)
+    } else {
+      alert(responseData.errors);
     }
+  };
 
-  }
-
-  const signup = async () =>{
+  const signup = async () => {
     console.log("Signup Executed", formData);
     let responseData;
-    await fetch ("http://localhost:4000/signup",{
+    await fetch("http://localhost:4000/signup", {
       method: "POST",
       headers: {
         Accept: "application/form-data",
         "Content-Type": "application/json",
       },
       body: JSON.stringify(formData),
-    }).then((response) => response.json()).then((data)=> responseData=data)
+    })
+      .then((response) => response.json())
+      .then((data) => (responseData = data));
 
     if (responseData.success) {
       localStorage.setItem("auth-token", responseData.token);
       window.location.replace("/");
-    }else{
-      alert(responseData.errors)
+    } else {
+      alert(responseData.errors);
     }
-
-    
-  }
+  };
 
   return (
     <div className="loginsignup">
@@ -64,21 +64,59 @@ const Loginsignup = () => {
         <h1>{state}</h1>
         <div className="loginsignup-fields">
           {state === "Sign Up" ? (
-            <input name="username" value={formData.username} onChange ={changeHandler} type="text" placeholder="Your Name" />
+            <input
+              name="username"
+              value={formData.username}
+              onChange={changeHandler}
+              type="text"
+              placeholder="Your Name"
+            />
           ) : (
             <></>
           )}
-          <input name="email" value={formData.email} onChange={changeHandler} type="email" placeholder="Email Address" />
-          <input name="password" value={formData.password} onChange={changeHandler} type="password" placeholder="Password" />
+          <input
+            name="email"
+            value={formData.email}
+            onChange={changeHandler}
+            type="email"
+            placeholder="Email Address"
+          />
+          <input
+            name="password"
+            value={formData.password}
+            onChange={changeHandler}
+            type="password"
+            placeholder="Password"
+          />
         </div>
-        <button onClick={()=> {state==="Login"?login():signup()}}>Continue</button>
+        <button
+          onClick={() => {
+            state === "Login" ? login() : signup();
+          }}
+        >
+          Continue
+        </button>
         {state === "Sign Up" ? (
           <p className="loginsignup-login">
-            Already have an account? <span onClick={()=>{setState("Login")}}>Login here</span>
+            Already have an account?{" "}
+            <span
+              onClick={() => {
+                setState("Login");
+              }}
+            >
+              Login here
+            </span>
           </p>
         ) : (
           <p className="loginsignup-login">
-            Create account? <span onClick={()=>{setState("Sign Up")}}>Click here</span>
+            Create account?{" "}
+            <span
+              onClick={() => {
+                setState("Sign Up");
+              }}
+            >
+              Click here
+            </span>
           </p>
         )}
 

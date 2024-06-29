@@ -13,9 +13,9 @@ const Allproducts = () => {
       });
   };
 
-  useEffect(()=>{
-   getallproducts();
-  },[])
+  useEffect(() => {
+    getallproducts();
+  }, []);
 
   const removeproduct = async (id) => {
     await fetch("http://localhost:4000/removeproduct", {
@@ -24,16 +24,15 @@ const Allproducts = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ id: id}),
-    })
+      body: JSON.stringify({ id: id }),
+    });
 
-      await getallproducts()
-      
-     .then((resp) => resp.json())
-     .then((data) => {
-        data.success? alert("Product removed successfully") : alert("Fail");
+    await getallproducts()
+      .then((resp) => resp.json())
+      .then((data) => {
+        data.success ? alert("Product removed successfully") : alert("Fail");
       });
-  }
+  };
   return (
     <div className="allproducts">
       <h1>All Products</h1>
@@ -47,19 +46,25 @@ const Allproducts = () => {
       </div>
       <div className="listallproducts">
         <hr />
-        {allproducts.map((product,index)=>{
-          return <div key={index}className="allproducts-main  allproduct-format">
-            <img src={product.image} alt="" className="allproductimage" />
-            <p>{product.name}</p>
-            <p>${product.old_price}</p>
-            <p>${product.new_price}</p>
-            <p>{product.category}</p>
-            <img  onClick={()=>{removeproduct(product.id)}} src={Remove} alt="" className="removeproduct" />
-          </div>
-
-        }
-         
-        )}
+        {allproducts.map((product, index) => {
+          return (
+            <div key={index} className="allproducts-main  allproduct-format">
+              <img src={product.image} alt="" className="allproductimage" />
+              <p>{product.name}</p>
+              <p>${product.old_price}</p>
+              <p>${product.new_price}</p>
+              <p>{product.category}</p>
+              <img
+                onClick={() => {
+                  removeproduct(product.id);
+                }}
+                src={Remove}
+                alt=""
+                className="removeproduct"
+              />
+            </div>
+          );
+        })}
       </div>
     </div>
   );

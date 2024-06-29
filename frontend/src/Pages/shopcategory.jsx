@@ -11,9 +11,7 @@ const Shopcategory = (props) => {
         <p>
           <span>Search 1-8</span> out of 8 products
         </p>
-        <div className="shopcategory-sort">
-          Sort by 
-        </div>
+        <div className="shopcategory-sort">Sort by</div>
       </div>
       <div className="shopcategory-products">
         {all_product.map((item, i) => {

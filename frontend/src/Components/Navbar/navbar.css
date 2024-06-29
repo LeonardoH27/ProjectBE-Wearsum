@@ -16,8 +16,8 @@
 }
 
 .nav-menu {
-  display:flex;
-  align-items:center;
+  display: flex;
+  align-items: center;
   list-style: none;
   gap: 75px;
   color: #515151;
