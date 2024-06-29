@@ -4,19 +4,19 @@ const path = require("path");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const multer = require("multer");
-const bcrypt = require("bcryptjs"); // Import bcryptjs
+const bcrypt = require("bcryptjs"); 
 const app = express();
 const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
 
-// MongoDB
+// MONGODB
 mongoose.connect(
   "mongodb+srv://leonardohorta2705:12345678910@cluster0.hhhqnbx.mongodb.net/wearsum"
 );
 
-// Middleware to fetch user
+//MIDDLEWARE TO FECTCH USER
 const fetchUser = (req, res, next) => {
   const token = req.header("auth-token");
   if (!token) {
@@ -148,7 +148,7 @@ app.post("/signup", async (req, res) => {
     cart[i] = 0;
   }
 
-  // Hash the password before saving it
+  // PASSSWORD ENCRYPTION
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(req.body.password, salt);
 
