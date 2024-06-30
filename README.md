@@ -174,7 +174,7 @@ This API provides endpoints for an e-commerce platform called Wearsum. It includ
 
 - npm start
 
-- The server will run on http://localhost:4000 by default.
+- The server will run on http://localhost:3000 by default.
 
 
 ## Git:
