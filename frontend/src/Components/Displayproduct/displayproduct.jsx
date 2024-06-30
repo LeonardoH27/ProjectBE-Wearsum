@@ -27,8 +27,8 @@ const Displayproduct = (props) => {
 
         <div className="rightprices">
           <div className="rightpricesold">
-            ${product.old_price}
-            <div className="rightpricesnew">${product.new_price}</div>
+            ${product.new_price}
+            <div className="rightpricesnew">${product.old_price}</div>
             <div className="productdisplay-right-size">
               <h1>Select Size</h1>
               <div className="productdisplay-right-sizes">
